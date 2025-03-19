@@ -115,3 +115,67 @@ npm run check:apply
 ```
 
 VSCodeを使用している場合、ファイル保存時に自動的にフォーマットが適用されます。
+
+## テスト
+
+uvuを使用した軽量なテスト環境が用意されています。
+
+### テストの書き方
+
+テストファイルは `src/tests` ディレクトリに配置します。テストファイル名は `*.test.ts` というパターンにします。
+
+```typescript
+// src/tests/abc123_a.test.ts
+import { test } from 'uvu';
+import * as assert from 'uvu/assert';
+import { setMockInputs, resetAll } from '@/utils/io';
+import { OutputCapture, clearRequireCache } from '@/utils/test-helper';
+
+// テスト対象のソリューションファイルパス
+const SOLUTION_PATH = '@/abc/123/a/index';
+
+// 出力キャプチャ用のヘルパー
+const outputCapture = new OutputCapture();
+
+test.before.each(() => {
+  // テスト前に毎回実行
+  outputCapture.start();
+  resetAll();
+  clearRequireCache(SOLUTION_PATH);
+});
+
+test.after.each(() => {
+  // テスト後に毎回実行
+  outputCapture.stop();
+});
+
+test('テストケース1', () => {
+  // 入力をセット
+  setMockInputs([
+    '3',
+    '1 2 3',
+  ]);
+  
+  // ソリューションを実行
+  require(SOLUTION_PATH);
+  
+  // 出力が正しいか検証
+  const output = outputCapture.get();
+  assert.is(output[0], '6');
+});
+
+// テスト実行
+test.run();
+```
+
+### テストの実行
+
+```bash
+# すべてのテストを実行
+npm test
+
+# テストをウォッチモードで実行（ファイル変更時に自動実行）
+npm run test:watch
+```
+
+テンプレートファイル `src/tests/template.test.ts` を使用して、新しいテストを作成することができます。
