@@ -36,7 +36,9 @@ export function readInt(): number {
 
 // 標準入力から整数の配列を読み込む
 export function readInts(): number[] {
-  return readline().split(' ').map(v => parseInt(v, 10));
+  return readline()
+    .split(' ')
+    .map((v) => parseInt(v, 10));
 }
 
 // 標準入力から文字列の配列を読み込む

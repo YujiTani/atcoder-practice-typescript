@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--enable-source-maps TS_NODE_PROJECT=./tsconfig.json uvu -r tsm -r tsconfig-paths/register src/tests",
-    "test:watch": "watchlist src/tests src/abc -- npm test",
-    "ts": "ts-node -r tsconfig-paths/register",
-    "solve": "ts-node -r tsconfig-paths/register",
-    "watch": "ts-node-dev -r tsconfig-paths/register --respawn",
+    "test": "bun test src/tests",
+    "test:watch": "watchlist src/tests src/abc -- bun test",
+    "ts": "bun --no-install",
+    "solve": "bun --no-install",
+    "watch": "bun --watch --no-install",
     "compile": "tsc",
-    "lint": "eslint 'src/**/*.{js,ts}'",
+    "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check .",
     "check:apply": "biome check --apply ."
@@ -28,13 +28,8 @@
     "@types/node": "^22.13.10",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
-    "eslint": "^9.22.0",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.2.0",
     "tsm": "^2.3.0",
     "typescript": "^5.8.2",
-    "uvu": "^0.5.6",
     "watchlist": "^0.3.1"
   }
 }

@@ -13,7 +13,7 @@ test.before.each(() => {
   // テスト前に毎回実行
   outputCapture.start(); // コンソール出力をキャプチャ開始
   resetAll(); // 入力状態をリセット
-  
+
   try {
     // モジュールキャッシュをクリア
     clearRequireCache(SOLUTION_PATH);
@@ -30,10 +30,10 @@ test.after.each(() => {
 test('ABC001-A: 積雪深差', () => {
   // テストケース1
   setMockInputs(['10', '5']);
-  
+
   // ソリューションを実行
   require(SOLUTION_PATH);
-  
+
   // 出力が正しいか検証
   const output = outputCapture.get();
   assert.is(output[0], '5');
@@ -42,10 +42,10 @@ test('ABC001-A: 積雪深差', () => {
 test('ABC001-A: 負の積雪深差も扱える', () => {
   // テストケース2 - 2番目の入力が大きい場合
   setMockInputs(['5', '10']);
-  
+
   // ソリューションを実行
   require(SOLUTION_PATH);
-  
+
   // 出力が正しいか検証
   const output = outputCapture.get();
   assert.is(output[0], '-5');

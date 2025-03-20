@@ -7,7 +7,7 @@ const aliases = {};
 
 // tsconfigのpathsからエイリアスを生成
 if (paths) {
-  Object.keys(paths).forEach(key => {
+  Object.keys(paths).forEach((key) => {
     const alias = key.replace(/\/\*$/, '');
     const target = paths[key][0].replace(/\/\*$/, '');
     aliases[alias] = resolve(__dirname, target);
@@ -15,5 +15,5 @@ if (paths) {
 }
 
 module.exports = {
-  aliases
+  aliases,
 };
