@@ -10,69 +10,66 @@
  * 3. テストケースを追加・変更します
  */
 
-import { test } from 'uvu';
-import * as assert from 'uvu/assert';
+import { describe, test, expect, beforeEach, afterEach } from 'bun:test';
 import { setMockInputs, resetAll } from '@/utils/io';
 import { OutputCapture, clearRequireCache } from '@/utils/test-helper';
 
 // このファイルは参照用のテンプレートなのでテストをスキップします
-test.skip('テンプレートファイル - これは参照用です');
+test.skip('テンプレートファイル - これは参照用です', () => { });
 
-/*
 // テスト対象のソリューションファイルパス
-const SOLUTION_PATH = '@/abc/xxx/x/index';
+const SOLUTION_PATH = '@/abc/問題番号/問題ID/index';
 
 // 出力キャプチャ用のヘルパー
 const outputCapture = new OutputCapture();
 
-test.before.each(() => {
-  // テスト前に毎回実行
-  outputCapture.start(); // コンソール出力をキャプチャ開始
-  resetAll(); // 入力状態をリセット
-  
-  try {
-    // モジュールキャッシュをクリア
-    clearRequireCache(SOLUTION_PATH);
-  } catch (e) {
-    // ファイルが存在しない場合は無視
-  }
+describe('問題名', () => {
+  beforeEach(() => {
+    // テスト前に毎回実行
+    outputCapture.start(); // コンソール出力をキャプチャ開始
+    resetAll(); // 入力状態をリセット
+
+    try {
+      // モジュールキャッシュをクリア
+      clearRequireCache(SOLUTION_PATH);
+    } catch (e) {
+      // ファイルが存在しない場合は無視
+    }
+  });
+
+  afterEach(() => {
+    // テスト後に毎回実行
+    outputCapture.stop(); // キャプチャ停止
+  });
+
+  test('テストケース1', () => {
+    // 入力をセット
+    setMockInputs([
+      '入力1行目',
+      '入力2行目',
+      '入力3行目'
+    ]);
+
+    // ソリューションを実行
+    require(SOLUTION_PATH);
+
+    // 出力が正しいか検証
+    const output = outputCapture.get();
+    expect(output[0]).toBe('期待する出力1行目');
+    // 複数行の出力がある場合
+    // expect(output[1]).toBe('期待する出力2行目');
+  });
+
+  test('テストケース2', () => {
+    // 2つ目のテストケース
+    setMockInputs([
+      // ...別の入力
+    ]);
+
+    require(SOLUTION_PATH);
+
+    const output = outputCapture.get();
+    expect(output[0]).toBe('期待する出力');
+  });
 });
 
-test.after.each(() => {
-  // テスト後に毎回実行
-  outputCapture.stop(); // キャプチャ停止
-});
-
-test('テストケース1', () => {
-  // 入力をセット
-  setMockInputs([
-    '3',
-    '1 2 3',
-  ]);
-  
-  // ソリューションを実行
-  require(SOLUTION_PATH);
-  
-  // 出力が正しいか検証
-  const output = outputCapture.get();
-  assert.is(output[0], '6'); // 期待する出力
-});
-
-test('テストケース2', () => {
-  // 入力をセット
-  setMockInputs([
-    '5',
-    '1 2 3 4 5',
-  ]);
-  
-  // ソリューションを実行
-  require(SOLUTION_PATH);
-  
-  // 出力が正しいか検証
-  const output = outputCapture.get();
-  assert.is(output[0], '15'); // 期待する出力
-});
-*/
-
-// テストを実行
-test.run();
