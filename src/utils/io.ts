@@ -58,6 +58,12 @@ export function setMockInputs(mockInputs: string[]): void {
   readlineIndex = 0;
 }
 
+// 数値をうけとるモックを作成
+// export function setMockinputsNumber(mockInputs: number[]): void {
+//   inputs = [...mockInputs];
+//   readlineIndex = 0;
+// }
+
 // テスト用のインデックスリセット機能
 export function resetReadlineIndex(): void {
   readlineIndex = 0;
